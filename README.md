@@ -1,8 +1,3 @@
-<img width="1189" height="490" alt="image" src="https://github.com/user-attachments/assets/c3ff5854-cbfd-4bc9-9b9d-2259162da87b" />Sure! Here's a professional and detailed `README.md` file tailored for your GPT-2-based TinyStories project. You can copy and paste it directly into your GitHub repository:
-
----
-
-````markdown
 # 🧠 TinyStories GPT-2 - Minimal Transformer Language Model
 
 This project implements a simplified GPT-2 architecture using PyTorch to train on a subset of the [TinyStories dataset](https://huggingface.co/datasets/roneneldan/TinyStories). It covers data loading, model implementation from scratch (including self-attention and positional encoding), training with gradient accumulation, evaluation using perplexity, and text generation.
@@ -11,14 +6,14 @@ This project implements a simplified GPT-2 architecture using PyTorch to train o
 
 ## 📌 Features
 
-- ✅ Custom Transformer Decoder architecture (GPT-style)
-- ✅ Multi-head self-attention and positional encoding
-- ✅ Tokenization using HuggingFace GPT-2 tokenizer
-- ✅ Train/test split from local TinyStories dataset
-- ✅ Cross-entropy loss with padding token masking
-- ✅ Gradient accumulation support
-- ✅ Perplexity evaluation
-- ✅ Greedy text generation
+* ✅ Custom Transformer Decoder architecture (GPT-style)
+* ✅ Multi-head self-attention and positional encoding
+* ✅ Tokenization using HuggingFace GPT-2 tokenizer
+* ✅ Train/test split from local TinyStories dataset
+* ✅ Cross-entropy loss with padding token masking
+* ✅ Gradient accumulation support
+* ✅ Perplexity evaluation
+* ✅ Greedy text generation
 
 ---
 
@@ -31,12 +26,11 @@ You should first download and cache it locally using:
 ```python
 from datasets import load_dataset
 
-# Run this before using load_from_disk
 dataset = load_dataset("roneneldan/TinyStories", split="train")
 dataset.save_to_disk("./tinystories_local")
 ```
 
-Then in the main script, it is loaded using:
+Then in the main script:
 
 ```python
 from datasets import load_from_disk
@@ -47,77 +41,75 @@ dataset = load_from_disk("./tinystories_local")
 
 ## 🚀 Training
 
-To train the model on 10% of the dataset (90% train / 10% test split), simply run:
+To train the model on 10% of the dataset (90% train / 10% test split):
 
 ```bash
 python gpt2_tinystories.py
 ```
 
-Training parameters:
+**Training settings:**
 
 * Epochs: 5
 * Batch Size: 8
 * Learning Rate: 3e-4
 * Gradient Accumulation Steps: 2
-* Loss: Cross-entropy with padding mask
 
 After each epoch:
 
-* Model checkpoint is saved
-* Generated text sample is saved
-* Training loss and accuracy are plotted and saved
+* Model checkpoint saved
+* Sample text generated
+* Training loss/accuracy plotted
 
 ---
 
 ## 📈 Evaluation
 
-The model is evaluated using **perplexity** on the test set:
+Model is evaluated using **perplexity**:
 
 ```python
 def compute_perplexity(model, test_loader):
     ...
 ```
 
-This provides a numeric measure of how well the model predicts text (lower is better).
+Lower perplexity means better language modeling performance.
 
 ---
 
 ## ✍️ Text Generation
 
-You can generate text using either greedy decoding or sampling:
+Use greedy decoding or sampling:
 
 ```python
 def generate_text(model, prompt, max_length=50, method="greedy"):
     ...
 ```
 
-Example:
+**Example:**
 
-```python
+```
 Prompt: "Once upon a time, in a small village"
-Generated Text: "Once upon a time, in a small village, there was a little boy named Max who loved to build robots..."
+Generated: "Once upon a time, in a small village, there was a little boy named Max who loved to build robots..."
 ```
 
 ---
 
 ## 🧠 Model Architecture
 
-* Embedding Layer
-* Positional Encoding (Sinusoidal)
+* Embedding + Positional Encoding
 * 2 Transformer Decoder Layers:
 
   * Multi-Head Self-Attention
   * Feed-Forward Network
-  * LayerNorm + Residual Connections
-* Linear Output Layer
+  * LayerNorm + Residual
+* Linear Output Head
 
-Total Parameters: \~86M (based on GPT-2 tiny configuration)
+Approx. 86M parameters (GPT-2 tiny config).
 
 ---
 
 ## 🧰 Dependencies
 
-Make sure you have the following Python packages installed:
+Install required packages:
 
 ```bash
 pip install torch transformers datasets matplotlib
@@ -125,59 +117,59 @@ pip install torch transformers datasets matplotlib
 
 ---
 
-## 💾 Loading and Generating from Saved Model
+## 💾 Load + Generate
 
-Use `gpt2_generate.py` to load a saved model and generate new text:
+Use `gpt2_generate.py` to load a trained model and generate text:
 
 ```bash
 python gpt2_generate.py
 ```
 
-Edit the path to your `.pth` model and set the desired prompts in the script.
+Edit the model path and prompts as needed.
 
 ---
 
 ## 📊 Results
 
-Training metrics (loss and accuracy per epoch) are visualized in:
+Training metrics per epoch are plotted and saved automatically:
 
-```
-<img width="1189" height="490" alt="image" src="https://github.com/user-attachments/assets/30eea5df-4427-4099-aac3-662a0f9f110d" />
+![Training Metrics](https://github.com/user-attachments/assets/c3ff5854-cbfd-4bc9-9b9d-2259162da87b)
 
-```
-
-You can also inspect generated text samples after each epoch for qualitative evaluation.
+You can also review generated text samples.
 
 ---
 
 ## 📌 Notes
 
-* This implementation is educational and **not optimized for production**.
-* For large-scale or more efficient implementations, consider using the HuggingFace `transformers` library directly.
-* You can easily extend this project with additional decoder layers, larger datasets, or sampling techniques (e.g. top-k, nucleus).
+* This is a minimal, educational GPT-2-style model.
+* Use HuggingFace Transformers for production-level deployment.
+* Extend it with top-k sampling, more layers, or longer sequences.
 
 ---
 
 ## 📚 References
 
-* [Attention Is All You Need (Vaswani et al.)](https://arxiv.org/abs/1706.03762)
+* [Attention Is All You Need](https://arxiv.org/abs/1706.03762)
 * [GPT-2 Paper](https://openai.com/research/language-unsupervised)
 * [TinyStories Dataset](https://huggingface.co/datasets/roneneldan/TinyStories)
-* [HuggingFace Transformers](https://huggingface.co/transformers/)
-* [PyTorch Documentation](https://pytorch.org/docs/stable/index.html)
+* [HuggingFace Transformers](https://huggingface.co/transformers)
+* [PyTorch Docs](https://pytorch.org/docs/stable/index.html)
 
 ---
 
 ## ✨ Author
 
 **Mohamed Ashraf**
-Computer and Data Sciences | Alexandria University
+Computer and Data Sciences | Alexandria National University
 AI/ML Enthusiast • Deep Learning • NLP • Transformers
-[GitHub]([github.com/mohamedashraff22](https://github.com/mohamedashraff22)) | [LinkedIn]([https://linkedin.com/](https://www.linkedin.com/in/mohameed-ashraf/))
+[GitHub](https://github.com/mohamedashraff22) | [LinkedIn](https://www.linkedin.com/in/mohameed-ashraf/)
 
 ---
 
+## 📝 License
 
+This project is released under the MIT License.
 
-Let me know if you'd like to include images (e.g., a training plot or model diagram), Hugging Face model integration, or Colab support.
-```
+---
+
+Just paste this text directly into your `README.md` file — no edits needed! Let me know if you want a Colab badge or image hosting help.
