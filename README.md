@@ -169,7 +169,3 @@ AI/ML Enthusiast • Deep Learning • NLP • Transformers
 ## 📝 License
 
 This project is released under the MIT License.
-
----
-
-Just paste this text directly into your `README.md` file — no edits needed! Let me know if you want a Colab badge or image hosting help.
